@@ -1,0 +1,252 @@
+#root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ 
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F0F0F0;
+}
+ 
+.contact-app {
+  margin: 0 auto;
+  padding: 16px;
+ 
+}
+ 
+.contact-app  h1 {
+  font-weight: normal;
+  font-size: 48px;
+  margin-bottom: 32px;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  align-content: center;
+  align-items: start;
+}
+ 
+.notes-item {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 16px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.notes-action {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+ 
+.notes-item__body {
+  flex: 1;
+}
+ 
+.notes-item__title {
+  margin-bottom: 10px;
+  padding: 4px 0;
+  border-bottom: 1px solid #3C486B;
+}
+
+.notes-item__content {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+ 
+.notes-item__createdAt {
+  font-weight: lighter;
+  font-size: 10px;
+}
+
+.notes-item__status {
+  font-weight: bold;
+  padding: 5px;
+  font-size: 10px;
+  background-color: green;
+  color: white;
+  border-radius: 4px;
+}
+ 
+.notes-item__delete {
+  margin-top: 2rem;
+  padding: 8px 10px;
+  font-size: 15px;
+  color: #F45050;
+  background-color: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.notes-item__delete:hover {
+  margin-top: 2rem;
+  padding: 8px;
+  font-size: 15px;
+  color: #F0F0F0;
+  background-color: #3C486B;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.notes-item__archived {
+  margin-top: 2rem;
+  padding: 8px;
+  font-size: 12px;
+  color: white;
+  background-color: #3C486B;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  /* width: 100%; */
+}
+
+.subheader-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+ 
+.notes-input {
+  padding: 16px;
+  margin: 14px 0;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+ 
+.notes-input input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.notes-textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  font-family: 'Inter', sans-serif;
+}
+ 
+.notes-input button {
+  background-color: transparent;
+  color: #3C486B;
+  border: 1px solid #3C486B;
+  border-radius: 3px;
+  width: 100%;
+  padding: 5px;
+  font-family: 'Inter', sans-serif;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.notes-input button:hover {
+  background-color: #3C486B;
+  color: #F0F0F0;
+  border-radius: 3px;
+  width: 100%;
+  padding: 5px;
+  font-family: 'Inter', sans-serif;
+}
+
+.notes-input button:active {
+  background-color: #F9D949;
+  border: none;
+  color: #3C486B;
+}
+
+.empty-data {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.search-bar {
+  display: block;
+  width: 100%;
+  margin: 16px 0;
+  padding: 12px;
+  background-color: transparent;
+  font-family: 'Inter', sans-serif;
+  border: 2px dashed black;
+  border-radius: 4px;
+}
+
+nav {
+  display: flex;
+  justify-content:space-between; 
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #F0F0F0; 
+}
+
+nav ul {
+  display: flex;
+  list-style: none; 
+}
+
+nav li {
+  padding-left: 1rem; 
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+}
+
+.navigation ul li {
+  display: inline-block;
+  padding: 16px;
+}
+ 
+.navigation ul li a {
+  font-size: 28px;
+  color: black;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.notes-link {
+  font-weight: reguler;
+  font-size: 10px;
+}
+
+.badge {
+ background-color: #3C486B;
+ color: #F0F0F0;
+ border-radius: 5px;
+ padding: 3px 6px;
+ font-size: 10px;
+}
