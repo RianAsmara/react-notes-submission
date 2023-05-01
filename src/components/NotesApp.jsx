@@ -1,15 +1,22 @@
 import React from 'react';
-import NotesList from './NotesList';
-import { getInitialData } from '../utils/todos';
-import TodoForm from './NoteForm';
-
-class NotesPage extends React.Component {
+import ListNotesPageWrapper from '../pages/ListNotes';
+import Navigation from './Navigation';
+import { Route, Routes } from 'react-router-dom';
+import CreateNote from '../pages/CreateNote';
+import NotFoundPage from '../pages/NotFound';
+import DetailNote from '../pages/DetailNote';
+import { getAllNotes, countPublished, countArchived } from '../utils/notes-data';
+import ArchivedNotes from '../pages/ArchivedNotes'
+import PublishedNotes from '../pages/PublishedNotes'
+class NotesApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: getInitialData(),
-      published: getInitialData().filter(note => note.archived === false),
-      archieved: getInitialData().filter(note => note.archived === true)
+      notes: getAllNotes(),
+      published: getAllNotes().filter(note => note.archived === false),
+      archieved: getAllNotes().filter(note => note.archived === true),
+      countPub: countPublished(),
+      countArc: countArchived(),
     }
 
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
@@ -76,25 +83,22 @@ class NotesPage extends React.Component {
   render() {
     return (
       <div className="contact-app">
-        <h1>Catatan Harianku</h1>
-        <TodoForm addNote={this.onAddNoteHandler} />
-        <h2 style={{
-          visibility: this.state.notes.length > 0 ? 'visible' : 'hidden'
-        }}>All Notes</h2>
-        <hr style={{
-          marginTop: '20px',
-          marginBottom: '20px',
-          visibility: this.state.notes.length > 0 ? 'visible' : 'hidden'
-        }} />
-        <NotesList
-          notes={this.state.notes}
-          onDelete={this.onDeleteHandler}
-          onArchived={this.onArchivedHandler}
-          onPublished={this.onPublishHandler}
-        />
+        <header>
+          <Navigation countPublished={this.state.countPub} countArchive={this.state.countArc} />
+        </header>
+        <main>
+          <Routes>
+            <Route path='*' element={<NotFoundPage />} />
+            <Route path='/' element={<ListNotesPageWrapper />} />
+            <Route path='add-note' element={<CreateNote/>} />
+            <Route path='detail-note/:id' element={<DetailNote />} />
+            <Route path='archived' element={<ArchivedNotes />} />
+            <Route path='published' element={<PublishedNotes />} />
+          </Routes>
+        </main>
       </div>
     )
   }
 }
 
-export default NotesPage
+export default NotesApp

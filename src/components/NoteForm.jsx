@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NoteForm extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class NoteForm extends React.Component {
     }
 
     this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
-    this.onContentChangeEventHandler = this.onContentChangeEventHandler.bind(this);
+    this.onInputBodyHandler = this.onInputBodyHandler.bind(this);
     this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
   }
 
@@ -26,18 +27,17 @@ class NoteForm extends React.Component {
     });
   }
 
-  onContentChangeEventHandler(event) {
+  onInputBodyHandler(event) {
     this.setState(() => {
 
       return {
-        body: event.target.value,
+        body: event.target.innerHTML,
       }
     });
   }
 
   onSubmitEventHandler(event) {
     event.preventDefault();
-    // eslint-disable-next-line react/prop-types
     this.props.addNote(this.state);
   }
 
@@ -56,14 +56,21 @@ class NoteForm extends React.Component {
               karakter lagi
             </small>
           )}
-
-          <textarea className='notes-textarea' placeholder="Tuliskan judul catatanmu....." value={this.state.body} onChange={this.onContentChangeEventHandler}></textarea>
-
+          <div
+            className="add-new-page__input__body"
+            data-placeholder="Sebenarnya saya adalah ...."
+            contentEditable
+            onInput={this.onInputBodyHandler}
+          />
           <button type="submit">Tambah</button>
         </form>
       </div>
     )
   }
 }
+
+NoteForm.propTypes = {
+  addNote: PropTypes.func,
+};
 
 export default NoteForm;

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Navigation() {
+function Navigation({ countPublished, countArchive }) {
   return (
     <nav className="navigation">
       <h2>Catatan Belajarku</h2>
@@ -12,14 +13,18 @@ function Navigation() {
           <Link to="/add-note">Add Note</Link>
         </li>
         <li className='notes-link'>
-          <Link to="/published-note">Published <sup className='badge'>4</sup></Link>
+          <Link to="/published">Published <sup className='badge'>{countPublished ? countPublished : 0}</sup></Link>
         </li>
         <li className='notes-link'>
-          <Link to="/archived-note">Archived <sup className='badge'>1</sup> </Link>
+          <Link to="/archived">Archived <sup className='badge'>{countArchive ? countArchive : 0}</sup> </Link>
         </li>
       </ul>
     </nav>
   );
 }
 
+Navigation.propTypes = {
+  countPublished: PropTypes.number,
+  countArchive: PropTypes.number,
+};
 export default Navigation;

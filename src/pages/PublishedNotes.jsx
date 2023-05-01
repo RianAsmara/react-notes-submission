@@ -5,26 +5,23 @@ import PropTypes from 'prop-types';
 import { getAllNotes } from '../utils/notes-data';
 import NotesList from '../components/NotesList';
 
-function ListNotesPageWrapper() {
+function PublishedNotesPageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get('keyword');
   function changeSearchParams(keyword) {
     setSearchParams({ keyword });
   }
  
-  return <ListNotes defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  return <PublishedNotes defaultKeyword={keyword} keywordChange={changeSearchParams} />
 }
 
 
-class ListNotes extends React.Component {
+class PublishedNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       keyword: props.defaultKeyword || '',
-
-      notes: getAllNotes(),
       published: getAllNotes().filter(note => note.archived === false),
-      archieved: getAllNotes().filter(note => note.archived === true)
     }
 
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
@@ -35,12 +32,12 @@ class ListNotes extends React.Component {
   }
 
   onDeleteHandler(id) {
-    const notes = this.state.notes.filter(note => note.id !== id);
+    const notes = this.state.published.filter(note => note.id !== id);
     this.setState({ notes });
   }
 
   onPublishHandler(id) {
-    const newNotes = [...this.state.notes];
+    const newNotes = [...this.state.published];
     const noteIndex = newNotes.findIndex(n => n.id === id);
     if (newNotes[noteIndex].archived === true) {
 
@@ -55,7 +52,7 @@ class ListNotes extends React.Component {
   }
 
   onArchivedHandler(id) {
-    const newNotes = [...this.state.notes];
+    const newNotes = [...this.state.published];
     const noteIndex = newNotes.findIndex(n => n.id === id);
     if (newNotes[noteIndex].archived === false) {
 
@@ -72,7 +69,6 @@ class ListNotes extends React.Component {
 
   onAddNoteHandler({ title, body, archived, createdAt }) {
     this.setState((prevState) => {
-      console.log(prevState);
       return {
         notes: [
           ...prevState.notes,
@@ -100,7 +96,7 @@ class ListNotes extends React.Component {
   }
 
   render() {
-    const notes = this.state.notes.filter((note) => {
+    const notes = this.state.published.filter((note) => {
       return note.title.toLowerCase().includes(
         this.state.keyword.toLowerCase()
       );
@@ -121,9 +117,9 @@ class ListNotes extends React.Component {
   }
 }
 
-ListNotes.propTypes = {
+PublishedNotes.propTypes = {
   defaultKeyword: PropTypes.string,
   keywordChange: PropTypes.func
 }
 
-export default ListNotesPageWrapper
+export default PublishedNotesPageWrapper

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 function SearchBar({ keyword, keywordChange }) {
   return (
     <input
@@ -12,9 +11,9 @@ function SearchBar({ keyword, keywordChange }) {
   )
 }
 
-SearchBar.propType = {
+SearchBar.propTypes = {
   keyword: PropTypes.string.isRequired,
-  keywordChange: PropTypes.func.isRequired
+  keywordChange: PropTypes.func
 }
 
 export default SearchBar;
