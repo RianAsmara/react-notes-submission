@@ -1,15 +1,14 @@
 import NotesItem from "./NotesItem"
-// eslint-disable-next-line react/prop-types
+import PropTypes from 'prop-types';
+
 function NotesList({ notes, onDelete, onArchived, onPublished }) {
   return (
     <>
       <div className="notes-list">
         {
-          // eslint-disable-next-line react/prop-types
           notes.length === 0 ? (
             <p className='empty-data'>Tidak ada catatan</p>
           ) : (
-            // eslint-disable-next-line react/prop-types
             notes.map((note) => (
               <NotesItem
                 key={note.id}
@@ -26,4 +25,10 @@ function NotesList({ notes, onDelete, onArchived, onPublished }) {
   )
 }
 
+NotesList.propTypes = {
+  notes: PropTypes.array,
+  onDelete: PropTypes.func,
+  onArchived: PropTypes.func,
+  onPublished: PropTypes.func,
+};
 export default NotesList

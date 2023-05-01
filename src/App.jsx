@@ -1,10 +1,10 @@
 import './styles/App.css'
-import ListNotes from './pages/ListNotes'
+import NotesApp from './components/NotesApp'
 function App() {
   return (
     <>
       <div>
-        <ListNotes />
+        <NotesApp />
       </div>
     </>
   )

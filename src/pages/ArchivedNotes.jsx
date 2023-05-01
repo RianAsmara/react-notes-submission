@@ -5,25 +5,22 @@ import PropTypes from 'prop-types';
 import { getAllNotes } from '../utils/notes-data';
 import NotesList from '../components/NotesList';
 
-function ListNotesPageWrapper() {
+function ArchivedNotesPageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get('keyword');
   function changeSearchParams(keyword) {
     setSearchParams({ keyword });
   }
  
-  return <ListNotes defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  return <ArchivedNotes defaultKeyword={keyword} keywordChange={changeSearchParams} />
 }
 
 
-class ListNotes extends React.Component {
+class ArchivedNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       keyword: props.defaultKeyword || '',
-
-      notes: getAllNotes(),
-      published: getAllNotes().filter(note => note.archived === false),
       archieved: getAllNotes().filter(note => note.archived === true)
     }
 
@@ -35,12 +32,12 @@ class ListNotes extends React.Component {
   }
 
   onDeleteHandler(id) {
-    const notes = this.state.notes.filter(note => note.id !== id);
+    const notes = this.state.archieved.filter(note => note.id !== id);
     this.setState({ notes });
   }
 
   onPublishHandler(id) {
-    const newNotes = [...this.state.notes];
+    const newNotes = [...this.state.archieved];
     const noteIndex = newNotes.findIndex(n => n.id === id);
     if (newNotes[noteIndex].archived === true) {
 
@@ -55,7 +52,7 @@ class ListNotes extends React.Component {
   }
 
   onArchivedHandler(id) {
-    const newNotes = [...this.state.notes];
+    const newNotes = [...this.state.archieved];
     const noteIndex = newNotes.findIndex(n => n.id === id);
     if (newNotes[noteIndex].archived === false) {
 
@@ -100,11 +97,15 @@ class ListNotes extends React.Component {
   }
 
   render() {
-    const notes = this.state.notes.filter((note) => {
+    const notes = this.state.archieved.filter((note) => {
       return note.title.toLowerCase().includes(
         this.state.keyword.toLowerCase()
       );
     });
+
+    if (notes === null) {
+      return <p>Arsip kosong</p>;
+    }
 
     return (
       <div className="contact-app">
@@ -121,9 +122,9 @@ class ListNotes extends React.Component {
   }
 }
 
-ListNotes.propTypes = {
+ArchivedNotes.propTypes = {
   defaultKeyword: PropTypes.string,
   keywordChange: PropTypes.func
 }
 
-export default ListNotesPageWrapper
+export default ArchivedNotesPageWrapper

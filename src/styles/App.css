@@ -250,3 +250,13 @@ nav li {
  padding: 3px 6px;
  font-size: 10px;
 }
+
+.add-new-page__input__body {
+  width: 100%;
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #3C486B;
+}

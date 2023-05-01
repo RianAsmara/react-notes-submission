@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
  
-// eslint-disable-next-line react/prop-types
 function ArchivedButton({ id, onArchived }) {
   return <button className='notes-item__archived' onClick={() => onArchived(id)}>Archived</button>
 }
 
 ArchivedButton.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onArchived: PropTypes.func
 };
  
