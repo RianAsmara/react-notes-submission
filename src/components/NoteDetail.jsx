@@ -22,7 +22,7 @@ function NoteDetail({ title, body, archived, createdAt }) {
 NoteDetail.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  archived: PropTypes.string.isRequired,
+  archived: PropTypes.bool.isRequired,
   createdAt: PropTypes.string.isRequired
 };
 
