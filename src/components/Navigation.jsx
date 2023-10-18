@@ -1,25 +1,35 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { LocaleConsumer } from '../context/LocaleContext';
+import { FiHome } from 'react-icons/fi';
 
 function Navigation({ countPublished, countArchive }) {
   return (
-    <nav className="navigation">
-      <h2>Catatan Belajarku</h2>
-      <ul>
-        <li className='notes-link'>
-          <Link to="/">Home</Link>
-        </li>
-        <li className='notes-link'>
-          <Link to="/add-note">Add Note</Link>
-        </li>
-        <li className='notes-link'>
-          <Link to="/published">Published <sup className='badge'>{countPublished ? countPublished : 0}</sup></Link>
-        </li>
-        <li className='notes-link'>
-          <Link to="/archived">Archived <sup className='badge'>{countArchive ? countArchive : 0}</sup> </Link>
-        </li>
-      </ul>
-    </nav>
+    <LocaleConsumer>
+      {
+        ({ locale, toggleLocale }) => {
+          return (
+            <nav className="navigation">
+            <ul>
+              <li className='notes-link'>
+                <Link to="/"><FiHome /></Link>
+              </li>
+              <li className='notes-link'>
+                  <Link to="/add-note">{ locale === 'id' ? 'Tambah' : 'Add' }</Link>
+              </li>
+              <li className='notes-link'>
+                <Link to="/published">{locale === 'id' ? 'Rilis' : 'Published'} <sup className='badge'>{countPublished ? countPublished : 0}</sup></Link>
+              </li>
+              <li className='notes-link'>
+                <Link to="/archived">{locale === 'id' ? 'Arsip' : 'Archived'} <sup className='badge'>{countArchive ? countArchive : 0}</sup> </Link>
+              </li>
+              <li><button onClick={toggleLocale}>{locale === 'id' ? '🇬🇧' : '🇮🇩'}</button></li>
+            </ul>
+          </nav>
+          )
+        }
+         }
+    </LocaleConsumer>
   );
 }
 

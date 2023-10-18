@@ -103,7 +103,7 @@ class PublishedNotes extends React.Component {
     });
 
     return (
-      <div className="contact-app">
+      <div className="notes-app">
           <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
 
           <NotesList

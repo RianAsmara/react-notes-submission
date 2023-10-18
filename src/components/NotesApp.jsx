@@ -8,6 +8,7 @@ import DetailNote from '../pages/DetailNote';
 import { getAllNotes, countPublished, countArchived } from '../utils/notes-data';
 import ArchivedNotes from '../pages/ArchivedNotes'
 import PublishedNotes from '../pages/PublishedNotes'
+import { LocaleProvider } from '../context/LocaleContext';
 class NotesApp extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,22 @@ class NotesApp extends React.Component {
       archieved: getAllNotes().filter(note => note.archived === true),
       countPub: countPublished(),
       countArc: countArchived(),
+
+      localeContext: {
+        locale: localStorage.getItem('locale') || 'id',
+        toggleLocale: () => {
+          this.setState((prevState) => {
+            const newLocale = prevState.localeContext.locale === 'id' ? 'en' : 'id';
+            localStorage.setItem('locale', newLocale);
+            return {
+              localeContext: {
+                ...prevState.localeContext,
+                locale: newLocale
+              }
+            }
+          });
+        }
+      }
     }
 
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
@@ -82,21 +99,24 @@ class NotesApp extends React.Component {
 
   render() {
     return (
-      <div className="contact-app">
-        <header>
-          <Navigation countPublished={this.state.countPub} countArchive={this.state.countArc} />
-        </header>
-        <main>
-          <Routes>
-            <Route path='*' element={<NotFoundPage />} />
-            <Route path='/' element={<ListNotesPageWrapper />} />
-            <Route path='add-note' element={<CreateNote/>} />
-            <Route path='detail-note/:id' element={<DetailNote />} />
-            <Route path='archived' element={<ArchivedNotes />} />
-            <Route path='published' element={<PublishedNotes />} />
-          </Routes>
-        </main>
-      </div>
+      <LocaleProvider value={this.state.localeContext}>
+        <div className="notes-app">
+          <header className='notes-app__header'>
+            <h1>{this.state.localeContext.locale === 'id' ? 'Catatan Belajarku' : 'My Learning Notes'}</h1>
+            <Navigation countPublished={this.state.countPub} countArchive={this.state.countArc} />
+          </header>
+          <main>
+            <Routes>
+              <Route path='*' element={<NotFoundPage />} />
+              <Route path='/' element={<ListNotesPageWrapper />} />
+              <Route path='add-note' element={<CreateNote />} />
+              <Route path='detail-note/:id' element={<DetailNote />} />
+              <Route path='archived' element={<ArchivedNotes />} />
+              <Route path='published' element={<PublishedNotes />} />
+            </Routes>
+          </main>
+        </div>
+      </LocaleProvider>
     )
   }
 }

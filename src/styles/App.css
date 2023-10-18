@@ -16,17 +16,20 @@ body {
   background-color: #F0F0F0;
 }
  
-.contact-app {
+.notes-app {
   margin: 0 auto;
   padding: 16px;
  
 }
  
-.contact-app  h1 {
+.notes-app__header  h1 {
   font-weight: normal;
   font-size: 48px;
   margin-bottom: 32px;
+  color: #3C486B;
+
 }
+
 
 .notes-list {
   display: flex;
@@ -66,16 +69,19 @@ body {
   margin-bottom: 10px;
   padding: 4px 0;
   border-bottom: 1px solid #3C486B;
+  color: #3C486B;
 }
 
 .notes-item__content {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
+  color: #3C486B;
 }
  
 .notes-item__createdAt {
   font-weight: lighter;
   font-size: 10px;
+  color: #3C486B;
 }
 
 .notes-item__status {
@@ -224,6 +230,7 @@ nav li {
   border-radius: 5px;
   padding: 10px;
   gap: 10px;
+  color: #3C486B;
 }
 
 .navigation ul li {
@@ -236,6 +243,17 @@ nav li {
   color: black;
   font-weight: normal;
   font-size: 1rem;
+}
+
+.navigation ul li button {
+  background-color: transparent;
+  font-family: 'Inter', sans-serif;
+  border: 0;
+  cursor: pointer;
+  color: black;
+  font-weight: normal;
+  font-size: 1rem;
+  padding: 0;
 }
 
 .notes-link {

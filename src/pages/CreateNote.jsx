@@ -1,4 +1,3 @@
-// import { addContact } from '../data/contact-data';
 import { useNavigate } from 'react-router-dom';
 
 import NoteForm from "../components/NoteForm";
